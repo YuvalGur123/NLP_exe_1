@@ -1,8 +1,6 @@
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk import pos_tag
-import spacy
-from spacy.lang.he import Hebrew
 from spacy.tokenizer import Tokenizer
 from spacy.lang.en import English
 import pandas as pd
@@ -104,7 +102,7 @@ tokens_nltk = nltk.word_tokenize(string_text)
 
 tokens_nltk_lower = [x.lower() for x in tokens_nltk]
 lemmatizer = WordNetLemmatizer()
-lemmas_nltk = [lemmatizer.lemmatize(i,j[0].lower()) if j[0].lower() in ['a','n','v'] else lemmatizer.lemmatize(i) for i,j in pos_tag(tokens_nltk_lower)]
+lemmas_nltk = [lemmatizer.lemmatize(i, j[0].lower()) if j[0].lower() in ['a', 'n', 'v'] else lemmatizer.lemmatize(i) for i, j in pos_tag(tokens_nltk_lower)]
 
 ### spacy
 
@@ -137,8 +135,7 @@ print("5 most frequent words in nltk tokens: ", frequent_words_nltk_tokens)
 frequent_words_nltk_lemmas = Counter(lemmas_nltk).most_common(5)
 print("5 most frequent words in nltk lemmas: ", frequent_words_nltk_lemmas)
 
-spacy_tokens_as_words = [token.text
-    for token in tokens_spacy if not token.is_stop and not token.is_punct]
+spacy_tokens_as_words = [token.text for token in tokens_spacy if not token.is_stop and not token.is_punct]
 
 frequent_words_spacy_tokens = Counter(spacy_tokens_as_words).most_common(5)
 print("5 most frequent words in spacy tokens: ", frequent_words_spacy_tokens)
@@ -154,6 +151,7 @@ print("5 most frequent words in spacy lemmas: ", frequent_words_spacy_lemmas)
 # define a url get function
 
 print("########### PART 3 ###########")
+
 
 def getData(url):
     r = requests.get(url)
